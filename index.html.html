@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mera Hisaab · मेरा हिसाब</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;800&family=Inter:wght@500;700;800&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light;--bg:#F5F6FB;--card:#FFFFFF;--tx:#17183B;--mut:#5B5F82;--pri:#4F46E5;--onpri:#FFFFFF;--in:#087F55;--out:#D12F4F;--onout:#FFFFFF;--bd:#E3E5F2;--hero:#1E1B4B;--tint:#E8E7FF;--acc:#F5B83D}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0E0F24;--card:#181A3A;--tx:#EEF0FF;--mut:#A9ADD6;--pri:#9A93FF;--onpri:#10103A;--in:#4ADE9F;--out:#FF7B9B;--onout:#3A0716;--bd:#2A2D5A;--hero:#2B2873;--tint:#20235A;--acc:#F5B83D}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0E0F24;--card:#181A3A;--tx:#EEF0FF;--mut:#A9ADD6;--pri:#9A93FF;--onpri:#10103A;--in:#4ADE9F;--out:#FF7B9B;--onout:#3A0716;--bd:#2A2D5A;--hero:#2B2873;--tint:#20235A;--acc:#F5B83D}
+body{margin:0;background:var(--bg);color:var(--tx);font:18px/1.4 system-ui,"Noto Sans Devanagari","Mangal","Segoe UI",sans-serif}
+#app{max-width:520px;margin:0 auto;padding:16px 16px 120px}
+h1{font-size:28px;margin:8px 0}h2{font-size:22px;margin:8px 0}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin:12px 0}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.mut{color:var(--mut);font-size:15px}
+.btn{font:inherit;font-weight:700;min-height:56px;border-radius:16px;border:2px solid var(--pri);background:var(--card);color:var(--tx);padding:12px 16px;width:100%;cursor:pointer;margin:6px 0}
+.pri{background:var(--pri);color:var(--onpri)}
+.red{background:var(--out);border-color:var(--out);color:var(--onout)}
+.big{min-height:84px;font-size:22px}
+.sm{min-height:44px;width:auto;padding:6px 12px;font-size:15px;margin:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0}
+.cat{min-height:88px;font-size:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;margin:0;padding:8px 4px}
+.cat span{font-size:30px}
+.cat.on{background:var(--pri);color:var(--onpri)}
+input,textarea{font:inherit;min-height:56px;width:100%;box-sizing:border-box;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:14px;padding:10px 14px;margin:6px 0}
+.amt{font-size:40px;font-weight:800}
+.tin{color:var(--in)}.tout{color:var(--out)}
+.err{color:var(--out);font-weight:700}
+.big-n{font-size:34px;font-weight:800}
+.track{background:var(--bd);border-radius:7px;height:14px}.bar{background:var(--out);height:14px;border-radius:7px}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--bd);display:flex;padding:8px 4px calc(8px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;background:none;border:0;color:var(--mut);font:inherit;font-size:14px;min-height:52px;cursor:pointer}
+nav button span{display:block;font-size:26px}
+nav .on{color:var(--pri);font-weight:800}
+.toast{position:fixed;left:16px;right:16px;top:calc(12px + env(safe-area-inset-top,0px));background:var(--pri);color:var(--onpri);padding:14px;border-radius:14px;text-align:center;font-weight:700;z-index:5}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.chip{font:inherit;min-height:48px;border-radius:24px;border:2px solid var(--pri);background:var(--card);color:var(--tx);padding:6px 16px;cursor:pointer;font-weight:700}
+.chip.on{background:var(--pri);color:var(--onpri)}
+.bars{display:flex;gap:6px}.mc{flex:1;text-align:center;font-size:13px;color:var(--mut)}
+.pr{height:100px;display:flex;align-items:flex-end;gap:2px}.pr i{flex:1;border-radius:3px 3px 0 0;min-height:2px}
+body{font-family:"Inter","Noto Sans Devanagari",system-ui,sans-serif}
+h1{font-size:26px;font-weight:800}
+.card{box-shadow:0 2px 12px rgba(30,27,75,.07)}
+.btn{border-radius:18px}
+.hero{background:var(--hero);color:#FFFFFF;border-radius:26px;padding:20px;margin:14px 0}
+.hero .mut{color:#CFCBFF}
+.hchip{flex:1;background:rgba(255,255,255,.12);border-radius:16px;padding:10px 12px}
+.av{width:46px;height:46px;border-radius:50%;background:var(--acc);color:#2A1B00;display:grid;place-items:center;font-weight:800;font-size:20px;flex-shrink:0}
+.conn{width:100%;display:flex;align-items:center;gap:12px;background:var(--card);border:2px dashed var(--acc);border-radius:18px;padding:14px;margin:12px 0;font:inherit;color:var(--tx);text-align:left;cursor:pointer}
+.conn span{font-size:30px}
+.acc{background:var(--acc);border-color:var(--acc);color:#2A1B00}
+.step{width:34px;height:34px;border-radius:50%;background:var(--pri);color:var(--onpri);display:grid;place-items:center;font-weight:800;flex-shrink:0}
+.cat span{width:54px;height:54px;border-radius:50%;background:var(--tint);display:grid;place-items:center;font-size:28px}
+.cat.on span{background:rgba(255,255,255,.28)}
+nav{border-radius:22px 22px 0 0;box-shadow:0 -4px 16px rgba(30,27,75,.1)}
+nav .on{background:var(--tint);border-radius:16px}
+.pie{width:160px;height:160px;border-radius:50%;margin:0 auto;display:grid;place-items:center}
+.pie i{width:90px;height:90px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:15px;text-align:center}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px}
+.rcimg{max-width:100%;border-radius:14px;margin-top:8px}
+.fab{position:fixed;right:20px;bottom:calc(88px + env(safe-area-inset-bottom,0px));width:64px;height:64px;border-radius:50%;background:var(--pri);color:var(--onpri);border:0;font-size:36px;line-height:1;box-shadow:0 6px 18px rgba(30,27,75,.35);cursor:pointer;z-index:4}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+var K='mera_hisaab_v1',S=null;
+try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+if(!S)S={lang:'hi',name:'',mode:'',tx:[],ud:[],theme:''};
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+if(S.theme)document.documentElement.dataset.theme=S.theme;
+var L=function(h,e){return S.lang=='hi'?h:e};
+var $=function(s){return document.querySelector(s)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function money(n){return '₹'+Math.abs(n).toLocaleString('en-IN')}
+function pad(n){return(n<10?'0':'')+n}
+function today(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+var V={view:'home',step:0,month:today().slice(0,7),type:'out',cat:'',del:0,err:'',amt:'',note:'',date:'',toast:'',rs:0,f:'all',w:'',sms:'',rc:'',rv:0,bk:'',lock:!!S.pin};
+var C={pout:[['🍚','खाना','Food'],['🚌','सफर','Travel'],['💡','बिल','Bills'],['💊','दवाई','Medicine'],['🛍️','खरीदारी','Shopping'],['📚','पढ़ाई','School'],['📦','और','Other']],
+pin:[['💼','कमाई','Earnings'],['🎁','घर से मिला','From family'],['💰','और','Other']],
+bout:[['📦','माल खरीदा','Stock bought'],['👷','मजदूरी','Wages'],['🏠','किराया','Rent'],['🚚','ढुलाई','Transport'],['💡','बिजली/बिल','Bills'],['🔧','और','Other']],
+bin:[['🛒','बिक्री','Sales'],['🤝','उधार वसूली','Credit received'],['💰','और','Other']]};
+function cl(k){return C[k.slice(0,-1)][+k.slice(-1)]}
+function mt(m){return S.tx.filter(function(x){return x.mode==S.mode&&x.date.slice(0,7)==m})}
+function sum(l,t){return l.filter(function(x){return x.type==t}).reduce(function(a,x){return a+x.amt},0)}
+function mlabel(m){var p=m.split('-');return new Date(p[0],p[1]-1,1).toLocaleDateString(S.lang=='hi'?'hi-IN':'en-IN',{month:'long',year:'numeric'})}
+function balLabel(b){var bz=S.mode=='business';return b>=0?(bz?L('मुनाफ़ा','Profit'):L('बचत','Savings')):(bz?L('नुकसान','Loss'):L('कमी','Shortfall'))}
+function langBtns(){return '<div class="two"><button class="btn'+(S.lang=='hi'?' pri':'')+'" data-a="lang" data-v="hi">हिन्दी</button><button class="btn'+(S.lang=='en'?' pri':'')+'" data-a="lang" data-v="en">English</button></div>'}
+function vWelcome(){return '<h1>🙏 '+L('नमस्ते!','Welcome!')+'</h1><p class="mut">'+L('मेरा हिसाब: अपना खर्चा और कमाई आसानी से लिखें','Mera Hisaab: write your income and expenses easily')+'</p>'+langBtns()+'<h2>'+L('आपका नाम क्या है?','What is your name?')+'</h2><input id="nm" value="'+esc(S.name)+'" autocomplete="name" placeholder="'+L('यहाँ नाम लिखें','Type name here')+'">'+(V.err?'<p class="err">'+V.err+'</p>':'')+'<button class="btn pri big" data-a="next">'+L('आगे बढ़ें ➡️','Next ➡️')+'</button>'}
+function modeCards(act){return '<button class="btn big" data-a="'+act+'" data-v="personal" style="text-align:left">🏠 '+L('घर का हिसाब','Personal / Home')+'<div class="mut">'+L('रोज़ का खर्चा और कमाई','Daily spending and earning')+'</div></button><button class="btn big" data-a="'+act+'" data-v="business" style="text-align:left">🏪 '+L('दुकान / बिज़नेस','Business / Shop')+'<div class="mut">'+L('बिक्री, खर्चा, मुनाफ़ा और उधार','Sales, expenses, profit and credit')+'</div></button>'}
+function vMode(){return '<h1>'+L('आप इसे किसलिए इस्तेमाल करेंगे?','What will you use this for?')+'</h1>'+modeCards('mode')+'<p class="mut">'+L('बाद में सेटिंग में बदल सकते हैं।','You can change this later in Settings.')+'</p>'}
+function row(x){var c=cl(x.cat);return '<div class="card row"><div style="flex:1"><b>'+c[0]+' '+L(c[1],c[2])+'</b>'+(x.note?'<div class="mut">'+esc(x.note)+'</div>':'')+'<div class="mut">'+x.date.split('-').reverse().join('/')+(V.rv==x.id&&x.rc?'<img class="rcimg" alt="'+L('बिल','Receipt')+'" src="'+x.rc+'">':'')+'</div></div><div style="text-align:right"><b class="t'+x.type+'">'+(x.type=='in'?'+':'−')+money(x.amt)+'</b><div>'+(x.rc?'<button class="chip" style="min-height:44px;padding:2px 10px;margin:4px 4px 4px 0" data-a="rview" data-v="'+x.id+'" aria-label="'+L('बिल देखें','View receipt')+'">🧾</button>':'')+(x.type=='out'?'<button class="chip" style="min-height:44px;padding:2px 10px;margin:4px 0" data-a="wcyc" data-v="'+x.id+'" aria-label="'+L('सही था या नहीं','Worth it?')+'">'+({y:'✅',m:'🤔',n:'❌'}[x.w]||'❔')+'</button> ':'')+(V.del==x.id?'<button class="btn red sm" data-a="delok" data-v="'+x.id+'">'+L('हाँ, हटाओ','Yes, delete')+'</button>':'<button class="btn sm" data-a="delask" data-v="'+x.id+'" aria-label="'+L('हटाओ','Delete')+'">🗑️</button>')+'</div></div></div>'}
+function bcard(){var l=mt(today().slice(0,7)),o=sum(l,'out'),bg=S.budget||0,td=sum(l.filter(function(x){return x.date==today()}),'out'),p=bg?Math.round(o/bg*100):0;
+return '<div class="card"><div class="row"><span>'+L('आज का खर्चा','Spent today')+'</span><b class="tout">'+money(td)+'</b></div>'+(bg?'<div style="margin-top:12px"><div class="row"><span>🎯 '+L('महीने की सीमा ','Monthly limit ')+money(bg)+'</span><b class="'+(p>=100?'tout':'')+'">'+p+'%</b></div><div class="track"><div class="bar" style="width:'+Math.min(p,100)+'%"></div></div>'+(p>=100?'<p class="err">⚠️ '+L('सीमा पार हो गई! खर्चा रोकें।','Limit crossed! Slow down spending.')+'</p>':p>=80?'<p class="err">⚠️ '+L('सीमा के पास हैं, सँभल के।','Close to your limit, be careful.')+'</p>':'<div class="mut">'+L('अभी बचा है: ','Left: ')+money(bg-o)+'</div>')+'</div>':'<button class="btn" data-a="nav" data-v="set">🎯 '+L('महीने की खर्च सीमा तय करें','Set a monthly spending limit')+'</button>')+'</div>'}
+function quick(){var SR=window.SpeechRecognition||window.webkitSpeechRecognition;return '<div class="chips">'+[10,20,50,100,200,500,1000].map(function(n){return '<button class="chip" data-a="q" data-v="'+n+'">₹'+n+'</button>'}).join('')+(SR?'<button class="chip" data-a="mic">🎤 '+L('बोलकर लिखें','Speak')+'</button>':'')+'</div>'}
+function filt(){return '<div class="chips">'+[['all','सब','All'],['in','आया','In'],['out','खर्चा','Out'],['bad','❌ नहीं लेना था','❌ Regret']].map(function(c){return '<button class="chip'+(V.f==c[0]?' on':'')+'" data-a="flt" data-v="'+c[0]+'">'+L(c[1],c[2])+'</button>'}).join('')+'</div>'}
+function trend(){var p=V.month.split('-'),r=[],mx=1;for(var k=5;k>=0;k--){var d=new Date(p[0],p[1]-1-k,1),l=mt(d.getFullYear()+'-'+pad(d.getMonth()+1)),i=sum(l,'in'),o=sum(l,'out');mx=Math.max(mx,i,o);r.push([d,i,o])}
+return '<h2>📊 '+L('पिछले 6 महीने','Last 6 months')+'</h2><div class="card"><div class="bars">'+r.map(function(x){return '<div class="mc"><div class="pr"><i style="height:'+Math.round(x[1]/mx*100)+'px;background:var(--in)"></i><i style="height:'+Math.round(x[2]/mx*100)+'px;background:var(--out)"></i></div>'+x[0].toLocaleDateString(S.lang=='hi'?'hi-IN':'en-IN',{month:'short'})+'</div>'}).join('')+'</div><div class="mut">🟩 '+L('आया','In')+' · 🟥 '+L('खर्चा','Out')+'</div></div>'}
+function share(){var l=mt(V.month),i=sum(l,'in'),o=sum(l,'out'),t=(S.mode=='business'?'🏪 ':'🏠 ')+L('हिसाब','Summary')+' - '+mlabel(V.month)+'\n'+L('आया','In')+': '+money(i)+'\n'+L('खर्चा','Out')+': '+money(o)+'\n'+balLabel(i-o)+': '+money(i-o);
+return '<div class="two"><a class="btn pri" style="display:block;box-sizing:border-box;text-align:center;text-decoration:none" target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(t)+'">📲 WhatsApp</a><button class="btn" data-a="copy" data-v="'+esc(t)+'">📋 '+L('कॉपी करें','Copy')+'</button></div>'}
+var K2={pout:[[0,'swiggy zomato dmart kirana grocer restaurant hotel cafe bakery dhaba bigbasket blinkit zepto sweet'],[1,'uber ola rapido irctc redbus petrol fuel bpcl hpcl iocl metro cab'],[2,'electric bijli bses jio airtel vodafone recharge gas dth broadband'],[3,'pharma medical medic apollo medplus clinic hospital chemist lab'],[4,'mall amazon flipkart myntra shopping fashion store mart retail'],[5,'school college fees tuition academy']],bout:[[0,'wholesale traders supplier distributor agency enterprises'],[1,'salary wages labour'],[2,'rent'],[3,'transport logistics cargo petrol fuel'],[4,'electric bijli jio airtel recharge']]};
+function guess(s,k){s=s.toLowerCase();if(k.slice(1)=='in')return 0;var g=K2[k]||[];for(var i=0;i<g.length;i++)if(g[i][1].split(' ').some(function(w){return s.indexOf(w)>=0}))return g[i][0];return C[k].length-1}
+function warnMsg(k){var l=mt(today().slice(0,7)),s=0,t=0;l.forEach(function(x){if(x.type=='out'){t+=x.amt;if(x.cat==k)s+=x.amt}});var c=cl(k),lim=(S.cb||{})[k],n=c[0]+' '+L(c[1],c[2]);if(lim&&s>=lim)return '⚠️ '+n+': '+L('सीमा पार हो गई!','limit crossed!');if(S.budget&&t>=S.budget)return '⚠️ '+L('महीने की सीमा पार हो गई!','Monthly limit crossed!');if(lim&&s>=lim*.8)return '⚠️ '+n+': '+L('सीमा के पास','near limit');return ''}
+function calert(){var l=mt(today().slice(0,7)),by={},r='';l.forEach(function(x){if(x.type=='out')by[x.cat]=(by[x.cat]||0)+x.amt});Object.keys(S.cb||{}).forEach(function(k){if(k.slice(0,-1)!=S.mode[0]+'out')return;var p=Math.round((by[k]||0)/S.cb[k]*100);if(p>=80){var c=cl(k);r+='<p class="err">⚠️ '+c[0]+' '+L(c[1],c[2])+': '+money(by[k]||0)+' / '+money(S.cb[k])+' ('+p+'%)'+(p>=100?' — '+L('सीमा पार!','over limit!'):'')+'</p>'}});return r?'<div class="card">'+r+'</div>':''}
+function catLim(){var k=S.mode[0]+'out';return '<h2>🎯 '+L('हर चीज़ की अलग सीमा','Limit per category')+'</h2><div class="card">'+C[k].map(function(c,i){return '<div class="row" style="margin:6px 0"><span>'+c[0]+' '+L(c[1],c[2])+'</span><input class="cbi" data-k="'+k+i+'" inputmode="decimal" placeholder="₹ 0" aria-label="'+L(c[1],c[2])+'" style="width:130px;margin:0" value="'+((S.cb||{})[k+i]||'')+'"></div>'}).join('')+'<button class="btn pri" data-a="cbset">'+L('सीमाएँ सेव करें','Save limits')+'</button></div>'}
+function worth(){if(V.type!='out')return '';return '<div class="mut">'+L('क्या ये खर्चा सही था?','Was this spending worth it?')+'</div><div class="chips">'+[['y','✅ ज़रूरी था','✅ Needed'],['m','🤔 ठीक था','🤔 Okay'],['n','❌ नहीं लेना था','❌ Should not have']].map(function(c){return '<button class="chip'+(V.w==c[0]?' on':'')+'" data-a="wset" data-v="'+c[0]+'">'+L(c[1],c[2])+'</button>'}).join('')+'</div>'}
+function smsBox(){return '<details class="card"><summary style="cursor:pointer;font-weight:700;min-height:44px">📩 '+L('बैंक / UPI SMS से अपने आप भरें','Auto-fill from bank / UPI SMS')+'</summary><p class="mut">'+L('बैंक का SMS यहाँ चिपकाएँ। ऐप रकम और दुकान पहचान लेगा। OTP या PIN कभी न चिपकाएँ।','Paste the bank SMS here. The app reads the amount and shop. Never paste an OTP or PIN.')+'</p><textarea id="sms" rows="3" placeholder="Rs 450 debited ... to APOLLO PHARMACY">'+esc(V.sms)+'</textarea><button class="btn" data-a="smsp">🔍 '+L('SMS पढ़ो','Read SMS')+'</button></details>'}
+function insight(){var l=mt(V.month).filter(function(x){return x.type=='out'}),o=sum(l,'out'),by={},bad=0,bn=0;if(!o)return '';l.forEach(function(x){by[x.cat]=(by[x.cat]||0)+x.amt;if(x.w=='n'){bad+=x.amt;bn++}});var ks=Object.keys(by).sort(function(a,b){return by[b]-by[a]}),k=ks[0],c=cl(k),p=Math.round(by[k]/o*100);
+return '<h2>💡 '+L('खर्चे की समझ','Spending insights')+'</h2><div class="card"><p>🔝 '+L('सबसे ज़्यादा खर्चा: ','Highest spending: ')+'<b>'+c[0]+' '+L(c[1],c[2])+'</b> — '+money(by[k])+' ('+p+'%)</p>'+(p>=40?'<p>💭 '+L('इसमें 10% कम करें तो हर महीने ','Cut 10% here and save ')+'<b>'+money(Math.round(by[k]*.1))+'</b> '+L('बचेंगे।','a month.')+'</p>':'')+'<p class="'+(bad?'tout':'')+'">❌ '+L('जो नहीं लेना था: ','Should not have bought: ')+'<b>'+money(bad)+'</b> ('+bn+') '+(bad?L('— ये पैसे बच सकते थे!','— this could have been saved!'):'')+'</p><p class="mut">'+L('हर एंट्री के पास ✅ 🤔 ❌ दबाकर बताएँ कि खर्चा सही था या नहीं।','Tap ✅ 🤔 ❌ on any entry to rate it.')+'</p></div>'}
+function stp(n,t,b){return '<div class="card row" style="align-items:flex-start;justify-content:flex-start;gap:14px"><span class="step">'+n+'</span><div><b>'+t+'</b><div class="mut">'+b+'</div></div></div>'}
+function vBank(){var bk=['SBI','PNB','HDFC','ICICI','Bank of Baroda','Canara','Axis','Kotak','PhonePe','Google Pay','Paytm','BHIM'];
+return '<button class="btn sm" data-a="nav" data-v="home">⬅️ '+L('वापस','Back')+'</button><h1>🏦 '+L('बैंक / UPI जोड़ें','Connect Bank / UPI')+'</h1><span class="chip on" style="cursor:default">🚧 PREVIEW · '+L('जल्द आ रहा है','Coming soon')+'</span><div class="card" style="border-color:var(--acc)">'+L('यह अभी सिर्फ़ आइडिया का नमूना है, असली बैंक कनेक्शन नहीं। असली कनेक्शन RBI के Account Aggregator से अगले चरण में आएगा।','This is a preview of the idea, not a live bank connection. The real connection will come next through the RBI Account Aggregator framework.')+'</div><h2>'+L('ऐसे काम करेगा','How it will work')+'</h2>'
++stp(1,L('बैंक या UPI ऐप चुनें','Pick your bank or UPI app'),'<div class="chips">'+bk.map(function(n){return '<span class="chip" style="cursor:default;min-height:36px;font-size:13px;padding:2px 12px">'+n+'</span>'}).join('')+'</div>')
++stp(2,L('आपकी सहमति','Your consent'),L('बैंक की अपनी सुरक्षित स्क्रीन पर सिर्फ़ देखने (read-only) की इजाज़त। कभी भी बंद कर सकते हैं।','Read-only permission on your bank’s own secure screen. You can switch it off any time.'))
++stp(3,L('अपने आप पहचान','Auto-detect'),L('हर भुगतान पर ऐप पूछेगा: किस काम के लिए? और दुकान, मॉल या मेडिकल अपने आप पहचानेगा।','After each payment the app asks: what was it for? It also spots shop, mall or medical.'))
++'<h2>🔒 '+L('सुरक्षा के नियम जो रखे जाएँगे','Security rules we will follow')+'</h2><div class="card"><p>• '+L('बैंक PIN, OTP या पासवर्ड कभी नहीं माँगा जाएगा','Bank PIN, OTP or password will never be asked')+'</p><p>• '+L('सिर्फ़ read-only: पैसे भेजने की ताकत नहीं','Read-only: no power to move money')+'</p><p>• '+L('सिर्फ़ RBI-लाइसेंस वाला Account Aggregator','Only an RBI-licensed Account Aggregator')+'</p><p>• '+L('डेटा encrypted, और आप कभी भी हटा सकते हैं','Data encrypted, and you can delete it any time')+'</p></div><button class="btn acc big" data-a="demo">▶️ '+L('Demo: पेमेंट पकड़ने पर ऐसे पूछेगा','Demo: how it will ask after a payment')+'</button><p class="mut">'+L('Demo आपको एक सैंपल भुगतान दिखाएगा; आप चाहें तो Save न करें।','The demo shows a sample payment; you do not have to save it.')+'</p>'}
+var PC=['#4F46E5','#F5B83D','#D12F4F','#087F55','#0EA5E9','#A855F7','#64748B'];
+function pie(by,ks,o){var a=0,g=ks.map(function(k,i){var d=by[k]/o*360,s=PC[i%7]+' '+a+'deg '+(a+d)+'deg';a+=d;return s}).join(',');return '<div class="pie" role="img" aria-label="'+L('खर्चे का पाई चार्ट','Spending pie chart')+'" style="background:conic-gradient('+g+')"><i>'+money(o)+'</i></div><div style="height:12px"></div>'}
+function hp(p){var x=5381;p='hisaab'+p;for(var i=0;i<p.length;i++)x=((x<<5)+x+p.charCodeAt(i))|0;return ''+x}
+function rcBox(){return '<div class="mut">🧾 '+L('बिल की फोटो (ज़रूरी नहीं)','Receipt photo (optional)')+'</div><input id="rc" type="file" accept="image/*" capture="environment" aria-label="'+L('बिल की फोटो','Receipt photo')+'">'+(V.rc?'<img class="rcimg" alt="'+L('बिल','Receipt')+'" src="'+V.rc+'" style="max-height:160px">':'')}
+function vLock(){return '<h1>🔐 '+L('PIN डालें','Enter PIN')+'</h1><input id="lk" type="password" inputmode="numeric" maxlength="4" class="amt" placeholder="••••" aria-label="PIN">'+(V.err?'<p class="err">'+V.err+'</p>':'')+'<button class="btn pri big" data-a="unlock">'+L('खोलें','Unlock')+'</button>'}
+function safe(){return '<h2>💾 '+L('बैकअप और सुरक्षा','Backup & security')+'</h2><div class="card"><button class="btn" data-a="bk">📤 '+L('बैकअप कोड बनाएँ','Create backup code')+'</button>'+(V.bk?'<textarea rows="4" readonly aria-label="backup">'+esc(V.bk)+'</textarea><p class="mut">'+L('इसे कॉपी करके WhatsApp या Notes में सेव करें। दूसरे फ़ोन या कंप्यूटर पर यहीं चिपकाकर वही हिसाब खोलें।','Copy this into WhatsApp or Notes. Paste it on another phone or computer to open the same records.')+'</p>':'')+'<textarea id="rst" rows="3" placeholder="'+L('बैकअप कोड यहाँ चिपकाएँ','Paste backup code here')+'"></textarea><button class="btn" data-a="rest">📥 '+L('रीस्टोर करें','Restore')+'</button><p class="mut">'+L('बिल की फोटो बैकअप में नहीं जातीं।','Receipt photos are not included in the backup.')+'</p></div><div class="card"><b>🔐 '+L('PIN लॉक','PIN lock')+'</b>'+(S.pin?'<button class="btn red" data-a="pinoff">'+L('PIN हटाएँ','Remove PIN')+'</button>':'<input id="pn" type="password" inputmode="numeric" maxlength="4" placeholder="'+L('4 अंक का PIN','4-digit PIN')+'" aria-label="PIN"><button class="btn pri" data-a="pinset">'+L('PIN लगाएँ','Set PIN')+'</button>')+'<p class="mut">'+L('यह फ़ोन पर दूसरों से हिसाब छुपाने का साधारण लॉक है।','A simple lock to keep others from opening your records on this phone.')+'</p></div>'}
+function mini(){var l=mt(today().slice(0,7)).filter(function(x){return x.type=='out'}),o=sum(l,'out'),by={};if(!o)return '';l.forEach(function(x){by[x.cat]=(by[x.cat]||0)+x.amt});var ks=Object.keys(by).sort(function(a,b){return by[b]-by[a]}).slice(0,3),a=0,g=ks.map(function(k,i){var d=by[k]/o*360,s=PC[i]+' '+a+'deg '+(a+d)+'deg';a+=d;return s});if(a<359)g.push('var(--bd) '+a+'deg 360deg');
+return '<div class="card row" style="gap:16px"><div class="pie" role="img" aria-label="'+L('टॉप 3 खर्चे','Top 3 spending')+'" style="width:110px;height:110px;margin:0;flex-shrink:0;background:conic-gradient('+g.join(',')+')"><i style="width:58px;height:58px"></i></div><div style="flex:1"><b>'+L('इस महीने टॉप 3','Top 3 this month')+'</b>'+ks.map(function(k,i){var c=cl(k);return '<div><i class="dot" style="background:'+PC[i]+'"></i>'+c[0]+' '+L(c[1],c[2])+' <b>'+Math.round(by[k]/o*100)+'%</b></div>'}).join('')+'</div></div>'}
+function vHome(){var bz=S.mode=='business',l=mt(today().slice(0,7)),i=sum(l,'in'),o=sum(l,'out'),b=i-o,u=S.ud.filter(function(x){return!x.paid}),ut=u.reduce(function(a,x){return a+x.amt},0);
+return '<div class="row"><div class="row" style="justify-content:flex-start;gap:12px"><div class="av">'+esc((S.name||'?').charAt(0).toUpperCase())+'</div><div><div class="mut">'+L('नमस्ते 🙏','Hello 🙏')+'</div><b style="font-size:20px">'+esc(S.name)+'</b></div></div><span class="chip" style="cursor:default;min-height:40px">'+(bz?'🏪 '+L('बिज़नेस','Business'):'🏠 '+L('घर','Home'))+'</span></div><div class="hero"><div class="mut">'+mlabel(today().slice(0,7))+' · '+balLabel(b)+'</div><div style="font-size:32px;font-weight:800;line-height:1.2;margin:6px 0 16px;color:'+(b>=0?'#7CF2BF':'#FFA3B8')+'">'+(b<0?'−':'')+money(b)+'</div><div class="row"><div class="hchip"><div class="mut">⬇️ '+(bz?L('बिक्री / आया','Money in'):L('कमाई','Income'))+'</div><b style="color:#7CF2BF">'+money(i)+'</b></div><div class="hchip"><div class="mut">⬆️ '+L('खर्चा','Expenses')+'</div><b style="color:#FFA3B8">'+money(o)+'</b></div></div></div>'+mini()+'<button class="conn" data-a="nav" data-v="bank"><span>🏦</span><div><b>'+L('बैंक / UPI जोड़ें','Connect Bank / UPI')+'</b><div class="mut">'+L('खर्चा अपने आप पकड़ेगा · Preview','Auto-detect payments · Preview')+'</div></div></button>'+bcard()+calert()+'<div class="two"><button class="btn red big" data-a="add" data-v="out">➖<br>'+L('खर्चा लिखो','Add expense')+'</button><button class="btn pri big" data-a="add" data-v="in">➕<br>'+(bz?L('बिक्री / पैसा आया','Sale / money in'):L('पैसा आया','Money in'))+'</button></div>'
++(bz?'<button class="card row" style="width:100%;font:inherit;color:inherit;cursor:pointer;text-align:left" data-a="nav" data-v="ud"><span>🤝 '+L('उधार बाकी','Credit pending')+' ('+u.length+')</span><b>'+money(ut)+'</b></button>':'')
++'<h2>'+L('हाल की एंट्री','Recent entries')+'</h2>'+(S.tx.filter(function(x){return x.mode==S.mode}).slice(-5).reverse().map(row).join('')||'<p class="mut">'+L('अभी कुछ नहीं लिखा। ऊपर के बटन दबाएँ।','Nothing yet. Tap a button above.')+'</p>')}
+function vAdd(){var o=V.type=='out',k=S.mode[0]+V.type;
+return '<button class="btn sm" data-a="nav" data-v="home">⬅️ '+L('वापस','Back')+'</button><h1>'+(o?'➖ '+L('खर्चा लिखो','Add expense'):'➕ '+L('पैसा आया','Money in'))+'</h1>'+smsBox()+'<div class="mut">'+L('कितने रुपये?','How much (₹)?')+'</div><input id="amt" class="amt" inputmode="decimal" placeholder="₹ 0" value="'+esc(V.amt)+'">'+quick()+'<div class="mut">'+(o?L('किस चीज़ में खर्च हुआ?','What was it spent on?'):L('कहाँ से आया?','Where did it come from?'))+'</div><div class="grid">'+C[k].map(function(c,i){return '<button class="btn cat'+(V.cat==k+i?' on':'')+'" data-a="cat" data-v="'+k+i+'"><span>'+c[0]+'</span>'+L(c[1],c[2])+'</button>'}).join('')+'</div>'+worth()+'<input id="note" placeholder="'+L('कुछ लिखना हो तो (ज़रूरी नहीं)','Note (optional)')+'" value="'+esc(V.note)+'">'+rcBox()+'<div class="mut">'+L('तारीख','Date')+'</div><input id="dt" type="date" value="'+(V.date||today())+'">'+(V.err?'<p class="err">'+V.err+'</p>':'')+'<button class="btn pri big" data-a="save">✅ '+L('सेव करें','Save')+'</button>'}
+function vHist(){var l=mt(V.month),o=sum(l,'out'),i=sum(l,'in'),by={};
+l.filter(function(x){return x.type=='out'}).forEach(function(x){by[x.cat]=(by[x.cat]||0)+x.amt});
+var ks=Object.keys(by).sort(function(a,b){return by[b]-by[a]});
+return '<h1>📒 '+L('हिसाब','Records')+'</h1><div class="row"><button class="btn sm" data-a="mon" data-v="-1" aria-label="prev">◀️</button><b>'+mlabel(V.month)+'</b><button class="btn sm" data-a="mon" data-v="1" aria-label="next">▶️</button></div><div class="card"><div class="row"><span>'+L('आया','In')+'</span><b class="tin">'+money(i)+'</b></div><div class="row"><span>'+L('खर्चा','Out')+'</span><b class="tout">'+money(o)+'</b></div></div>'
++insight()+trend()+share()+(ks.length?'<h2>'+L('खर्चा कहाँ गया?','Where did money go?')+'</h2><div class="card">'+pie(by,ks,o)+ks.map(function(k,ix){var c=cl(k);return '<div style="margin:10px 0"><div class="row"><span><i class="dot" style="background:'+PC[ix%7]+'"></i>'+c[0]+' '+L(c[1],c[2])+'</span><b>'+money(by[k])+'</b></div><div class="track"><div class="bar" style="width:'+Math.round(by[k]/o*100)+'%"></div></div></div>'}).join('')+'</div>':'')
++'<h2>'+L('सारी एंट्री','All entries')+'</h2>'+filt()+(l.filter(function(x){return V.f=='all'||(V.f=='bad'?x.w=='n':x.type==V.f)}).sort(function(a,b){return b.date<a.date?-1:b.date>a.date?1:b.id-a.id}).map(row).join('')||'<p class="mut">'+L('इस महीने कुछ नहीं।','Nothing this month.')+'</p>')}
+function vUd(){var u=S.ud.slice().reverse(),t=S.ud.filter(function(x){return!x.paid}).reduce(function(a,x){return a+x.amt},0);
+return '<h1>🤝 '+L('उधार','Credit')+'</h1><p class="mut">'+L('जिन लोगों को आपने उधार दिया, उनका हिसाब।','People who owe you money.')+'</p><div class="card row"><span>'+L('कुल बाकी','Total pending')+'</span><span class="big-n tout">'+money(t)+'</span></div><div class="card"><input id="un" placeholder="'+L('किसने लिया? (नाम)','Who owes? (name)')+'"><input id="ua" inputmode="decimal" placeholder="₹ '+L('कितना?','Amount?')+'">'+(V.err?'<p class="err">'+V.err+'</p>':'')+'<button class="btn pri" data-a="uadd">➕ '+L('उधार लिखो','Add credit')+'</button></div>'
++u.map(function(x){return '<div class="card row"><div style="flex:1"><b>'+esc(x.name)+'</b><div class="mut">'+x.date.split('-').reverse().join('/')+(x.paid?' · ✅ '+L('मिल गया','Paid'):'')+'</div></div><div style="text-align:right"><b>'+money(x.amt)+'</b><div>'+(x.paid?'':'<button class="btn pri sm" data-a="upaid" data-v="'+x.id+'">✅ '+L('पैसा मिला','Received')+'</button> ')+'<button class="btn sm" data-a="udel" data-v="'+x.id+'" aria-label="'+L('हटाओ','Delete')+'">🗑️</button></div></div></div>'}).join('')}
+function vSet(){return '<h1>⚙️ '+L('सेटिंग','Settings')+'</h1><h2>'+L('भाषा','Language')+'</h2>'+langBtns()+'<h2>'+L('इस्तेमाल बदलें','Switch use')+'</h2>'+modeCards('setmode')+'<p class="mut">'+L('दोनों का हिसाब अलग अलग रहता है।','Both keep separate records.')+'</p><h2>🎯 '+L('महीने की खर्च सीमा','Monthly spending limit')+'</h2><input id="bg" inputmode="decimal" placeholder="₹ 0" value="'+(S.budget||'')+'"><button class="btn pri" data-a="bset">'+L('सीमा सेव करें','Save limit')+'</button>'+catLim()+safe()+'<button class="btn" data-a="theme">🌓 '+L('रोशनी / अँधेरा','Light / Dark')+'</button><h2>'+L('सारा डेटा हटाएं','Erase all data')+'</h2><button class="btn red" data-a="'+(V.rs?'resetok':'resetask')+'">'+(V.rs?L('पक्का? हाँ, सब हटाओ','Sure? Yes, erase all'):'🗑️ '+L('सब हटाओ','Erase all'))+'</button><p class="mut">'+L('आपका डेटा सिर्फ इसी फ़ोन या ब्राउज़र में रहता है।','Your data stays only on this phone or browser.')+'</p><div class="card">🔒 '+L('यह ऐप आपका बैंक PIN, OTP या पासवर्ड कभी नहीं मांगता और SMS सेव नहीं करता। बैंक से सीधा कनेक्शन (Account Aggregator) अगला चरण है।','This app never asks for your bank PIN, OTP or password and does not save SMS text. Direct bank connection (Account Aggregator) is the next step.')+'</div>'}
+function nav(){var t=[['home','🏠',L('होम','Home')],['hist','📒',L('हिसाब','Records')]];if(S.mode=='business')t.push(['ud','🤝',L('उधार','Credit')]);t.push(['set','⚙️',L('सेटिंग','Settings')]);return '<nav>'+t.map(function(i){return '<button data-a="nav" data-v="'+i[0]+'" class="'+(V.view==i[0]?'on':'')+'"><span>'+i[1]+'</span>'+i[2]+'</button>'}).join('')+'</nav>'}
+function render(){var h;if(V.lock)h=vLock();else if(!S.mode)h=V.step?vMode():vWelcome();else if(V.view=='add')h=vAdd();else h={home:vHome,hist:vHist,ud:vUd,set:vSet,bank:vBank}[V.view]()+nav();
+$('#app').innerHTML=h+((!V.lock&&S.mode&&(V.view=='home'||V.view=='hist'))?'<button class="fab" data-a="add" data-v="out" aria-label="'+L('खर्चा जोड़ें','Add expense')+'">+</button>':'')+(V.toast?'<div class="toast" role="status">'+V.toast+'</div>':'')}
+function toast(m){V.toast=m;render();setTimeout(function(){V.toast='';render()},m.indexOf('⚠')>=0?4500:1800)}
+function num(s){var n=parseFloat(String(s).replace(/[^0-9.]/g,''));return n>0?Math.round(n*100)/100:0}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a,v=b.dataset.v,go=true;
+if(V.view=='add'&&$('#amt')){V.amt=$('#amt').value;V.note=$('#note').value;V.date=$('#dt').value;V.sms=$('#sms').value}
+V.err='';
+if(a=='lang')S.lang=v;
+else if(a=='next'){var n=$('#nm').value.trim();S.name=n;if(!n)V.err=L('कृपया अपना नाम लिखें','Please enter your name');else V.step=1}
+else if(a=='mode'||a=='setmode'){S.mode=v;V.view='home'}
+else if(a=='nav'){V.view=v;V.del=0;V.rs=0;window.scrollTo(0,0)}
+else if(a=='add'){V.type=v;V.cat='';V.w='';V.sms='';V.rc='';V.amt='';V.note='';V.date='';V.view='add';window.scrollTo(0,0)}
+else if(a=='cat')V.cat=v;
+else if(a=='rview')V.rv=V.rv==+v?0:+v;
+else if(a=='bk')V.bk=JSON.stringify(S,function(k,x){return k=='rc'||k=='pin'?undefined:x});
+else if(a=='rest'){try{var d=JSON.parse($('#rst').value.trim());if(!d||!Array.isArray(d.tx)||!Array.isArray(d.ud)||(d.mode!='personal'&&d.mode!='business'))throw 0;d.tx=d.tx.filter(function(x){return x&&x.amt>0&&/^[pb](in|out)\d$/.test(x.cat)&&/^\d{4}-\d\d-\d\d$/.test(x.date)});d.ud=d.ud.filter(function(x){return x&&x.amt>0&&typeof x.name=='string'&&/^\d{4}-\d\d-\d\d$/.test(x.date)});d.lang=d.lang=='en'?'en':'hi';d.name=String(d.name||'');if(S.pin)d.pin=S.pin;else delete d.pin;S=d;V.view='home';save();toast('✅ '+L('रीस्टोर हो गया','Restored'))}catch(x){toast(L('कोड सही नहीं है','Invalid backup code'))}go=false}
+else if(a=='pinset'){var pn=$('#pn').value;if(!/^\d{4}$/.test(pn))toast(L('4 अंक लिखें','Enter 4 digits'));else{S.pin=hp(pn);save();toast('✅ '+L('PIN लग गया','PIN set'))}go=false}
+else if(a=='pinoff'){delete S.pin}
+else if(a=='unlock'){if(hp($('#lk').value)==S.pin)V.lock=0;else V.err=L('PIN गलत है','Wrong PIN')}
+else if(a=='demo'){V.type='out';var dk=S.mode[0]+'out';V.amt='450';V.note='APOLLO PHARMACY';V.cat=dk+guess('apollo pharmacy',dk);V.w='';V.rc='';V.date='';V.view='add';window.scrollTo(0,0);toast('🔔 DEMO: '+L('ऐसे ऐप हर भुगतान पकड़कर पूछेगा','This is how the app will ask after each payment'));go=false}
+else if(a=='wset')V.w=V.w==v?'':v;
+else if(a=='wcyc'){S.tx.forEach(function(x){if(x.id==v)x.w={'':'y',y:'m',m:'n',n:''}[x.w||'']})}
+else if(a=='cbset'){S.cb={};document.querySelectorAll('.cbi').forEach(function(el){var n=num(el.value);if(n)S.cb[el.dataset.k]=n});save();toast('✅ '+L('सेव हो गया','Saved'));go=false}
+else if(a=='smsp'){var t=V.sms||'',am=t.match(/(?:rs\.?|inr|₹)\s*([0-9][0-9,]*(?:\.[0-9]+)?)/i),mm=t.match(/\bto\s+([A-Za-z][A-Za-z0-9@._&\- ]{2,28})/i)||t.match(/\bat\s+([A-Za-z][A-Za-z0-9@._&\- ]{2,28})/i);
+if(!am)V.err=L('SMS में रकम नहीं मिली','Could not find an amount');else{V.amt=am[1].replace(/,/g,'');V.note=mm?mm[1].split(/\s+(?:on|ref|upi|via|txn|avl|bal)\b/i)[0].trim():'';V.type=/credited|received/i.test(t)?'in':'out';var k=S.mode[0]+V.type;V.cat=k+guess(V.note+' '+t,k);V.sms='';V.w='';var c=cl(V.cat);toast('✅ '+L('पढ़ लिया: ','Read: ')+money(+V.amt)+' · '+c[0]+' '+L(c[1],c[2])+' — '+L('सही हो तो चुनकर Save करें','confirm and Save'));go=false}}
+else if(a=='q')V.amt=v;
+else if(a=='flt')V.f=v;
+else if(a=='bset'){S.budget=num($('#bg').value);save();toast('✅ '+L('सेव हो गया','Saved'));go=false}
+else if(a=='copy'){try{navigator.clipboard.writeText(v).then(function(){toast('✅ '+L('कॉपी हो गया','Copied'))},function(){toast(L('कॉपी नहीं हुआ','Copy failed'))})}catch(x){toast(L('कॉपी नहीं हुआ','Copy failed'))}go=false}
+else if(a=='mic'){var SR=window.SpeechRecognition||window.webkitSpeechRecognition;try{var r=new SR();r.lang=S.lang=='hi'?'hi-IN':'en-IN';r.onresult=function(ev){var t=ev.results[0][0].transcript,m=t.match(/[0-9][0-9,.]*/);if(m)V.amt=m[0].replace(/,/g,'');V.note=t;render()};r.onerror=function(){toast(L('माइक नहीं चला','Mic did not work'))};r.start();toast('🎤 '+L('बोलिए...','Speak now...'));go=false}catch(x){V.err=L('यहाँ माइक नहीं चलेगा','Voice not supported here')}}
+else if(a=='save'){var m=num(V.amt);if(!m)V.err=L('पहले रुपये लिखें','Please enter the amount');else if(!V.cat)V.err=L('एक चीज़ चुनें','Please pick one category');else{S.tx.push({id:Date.now(),mode:S.mode,type:V.type,amt:m,cat:V.cat,note:V.note.trim(),date:V.date||today(),w:V.type=='out'?V.w:'',rc:V.rc||''});V.view='home';save();toast((V.type=='out'&&warnMsg(V.cat))||'✅ '+L('लिख लिया','Saved'));go=false}}
+else if(a=='mon'){var p=V.month.split('-'),d=new Date(p[0],p[1]-1+ +v,1);V.month=d.getFullYear()+'-'+pad(d.getMonth()+1)}
+else if(a=='delask')V.del=+v;
+else if(a=='delok'){S.tx=S.tx.filter(function(x){return x.id!=v});V.del=0}
+else if(a=='uadd'){var nm=$('#un').value.trim(),am=num($('#ua').value);if(!nm||!am)V.err=L('नाम और रुपये दोनों लिखें','Enter both name and amount');else{S.ud.push({id:Date.now(),name:nm,amt:am,paid:false,date:today()})}}
+else if(a=='upaid'){S.ud.forEach(function(x){if(x.id==v&&!x.paid){x.paid=true;S.tx.push({id:Date.now(),mode:'business',type:'in',amt:x.amt,cat:'bin1',note:x.name,date:today()})}})}
+else if(a=='udel')S.ud=S.ud.filter(function(x){return x.id!=v});
+else if(a=='theme'){S.theme=(document.documentElement.dataset.theme=='dark'||(!document.documentElement.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches))?'light':'dark';document.documentElement.dataset.theme=S.theme}
+else if(a=='resetask')V.rs=1;
+else if(a=='resetok'){S={lang:S.lang,name:'',mode:'',tx:[],ud:[],theme:S.theme};V.step=0;V.rs=0;V.view='home'}
+save();if(go)render()});
+document.addEventListener('change',function(e){if(e.target.id!='rc'||!e.target.files[0])return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,480/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);V.rc=c.toDataURL('image/jpeg',.6);V.amt=$('#amt').value;V.note=$('#note').value;V.date=$('#dt').value;V.sms=$('#sms').value;render()};im.src=r.result};r.readAsDataURL(e.target.files[0])});
+render();
+</script>
+</body>
+</html>
